@@ -1,6 +1,7 @@
 
 :root {
     --easing: ease-in-out;
+    --timing: 150ms;
 }
 
 
@@ -10,6 +11,11 @@
 
 body {
     margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 nav ul {
@@ -26,19 +32,22 @@ nav ul {
 .page-nav ul {
     display: flex;
     flex-direction: column;
-    width: 48px;
+    width: 40px;
     margin: 0;
+    gap: 1rem;
 }
 
 .page-nav {
-    
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     background-color: grey;
     height: 100%;
-    width: calc(48px + 2rem);
-    max-width: calc(48px + 2rem);
+    width: calc(40px + 2rem);
+    max-width: calc(40px + 2rem);
     padding: 1rem;
     overflow: hidden;
+    gap: 1rem;
     transition: 400ms var(--easing);
     transition-property: all;
 }
@@ -46,6 +55,23 @@ nav ul {
 #page-nav-collapser {
     border-radius: 999rem;
     width: 100%;
+    padding: 8px;
+    cursor: pointer;
+    border: solid 2px black;
+    background-color: black;
+    color: white;
+    transition: all var(--timing) var(--easing);
+}
+
+#page-nav-collapser:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+#page-nav-collapser i {
+    pointer-events: none;
+    transition: all 400ms var(--easing),
+                color var(--timing) var(--easing);
 }
 
 .nav-socials {
@@ -53,31 +79,88 @@ nav ul {
     justify-content: flex-end;
 }
 
-.nav-row {
+.nav-row a {
     display: flex;
     gap: 1rem;
     width: fit-content;
+    transition: all var(--timing) var(--easing);
 }
 
-.nav-row img {
-    width: 48px;
+.nav-row a:hover {
+    color: white;
 }
 
-.nav-row a {
+.nav-row i {
+    font-size: 32px;
+}
+
+.nav-row a span {
     white-space: nowrap;
     word-break: keep-all;
     display: block;
-    transition: all 200ms ease;
+    transition: all var(--timing) var(--easing),
+                opacity 400ms var(--easing);
     margin: auto;
 }
 
-.page-nav:not(.expanded) .nav-row a {
+.page-nav:not(.expanded) .nav-row a span {
     opacity: 0;
+    display: none;
+    animation-name: hide;
+    animation: hide 400ms;
 }
 
 main {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    align-items: center;
+}
 
+#home-page main {
+    justify-content: center;
+}
+
+#home-page main > .content-wrapper {
+    width: fit-content;
+}
+
+.page-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.page-links a {
+    padding: 0 1rem;
+    border: solid 2px black;
+    border-radius: 999rem;
+    text-align: center;
+}
+
+.page-links a span {
+    height: 100%;
+    padding: 1rem 0;
+}
+
+.page-links a:nth-of-type(odd) span:last-of-type {
+    display: none;
+    background-color: black;
+}
+
+.page-links a:nth-of-type(even) span:first-of-type {
+    display: none;
+    background-color: black;
+}
+
+@keyframes hide {
+    from {display: initial;}
+    to {display: none;}
 }

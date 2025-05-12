@@ -12,6 +12,7 @@ function addEventListeners() {
         const nav = document.querySelector('.page-nav');
         btn.classList.toggle('expanded');
         nav.classList.toggle('expanded');
+        btn.children[0].classList.toggle('fa-flip-horizontal');
         if (btn.classList.contains('expanded')) {
             let contentWidth = nav.scrollWidth;
             let navStyle = window.getComputedStyle(nav)
