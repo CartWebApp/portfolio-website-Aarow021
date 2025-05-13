@@ -3,14 +3,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Aaron Wright</title>
     <script src="https://kit.fontawesome.com/7d29dbf5af.js" crossorigin="anonymous"></script>
 </head>
 <body id="home-page">
     <div class="page-wrapper">
         <nav class="page-nav">
             <button id="page-nav-collapser">
-                <i class="fa-solid fa-arrow-right"></i>
+                <i class="fa-solid fa-arrow-right fa-fw"></i>
+            </button>
+            <button id="page-nav-burger">
+                <i class="burger fa-solid fa-bars fa-fw"></i>
+                <i class="x fa-solid fa-x fa-fw"></i>
             </button>
             <ul class="main-content">
                 <li class="nav-row">
@@ -54,6 +58,9 @@
             </ul>
         </nav>
         <main>
+            <!-- <div class="background">
+                <canvas id="bg"></canvas>
+            </div> -->
             <div class="content-wrapper">
                 <section class="page-intro">
                     <h1>Aaron Wright</h1>
@@ -78,6 +85,6 @@
         </main>
 
     </div>
-    <script src="script.js"></script>
+    <script src="init.js" type="module"></script>
 </body>
 </html>

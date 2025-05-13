@@ -1,7 +1,16 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+
 :root {
     --easing: ease-in-out;
     --timing: 150ms;
+    --color-primary: #000000;
+    --color-secondary: #ffffff;
+    --color-tertiary: #d1d1d1;
+    --color-quaternary: #ffffff;
+    --text-color: rgb(0, 0, 0);
 }
 
 
@@ -11,6 +20,20 @@
 
 body {
     margin: 0;
+    color: var(--text-color);
+    font-family: 'open sans', sans-serif;
+    font-size: 20px;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hidden.hidden {
+    display: none;
 }
 
 a {
@@ -23,11 +46,6 @@ nav ul {
     padding: 0;
 }
 
-.page-wrapper {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-}
 
 .page-nav ul {
     display: flex;
@@ -41,7 +59,7 @@ nav ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: grey;
+    background-color: var(--color-tertiary);
     height: 100%;
     width: calc(40px + 2rem);
     max-width: calc(40px + 2rem);
@@ -52,20 +70,30 @@ nav ul {
     transition-property: all;
 }
 
+.page-nav.expanded {
+    max-width: 15rem;
+    width: 15rem;
+}
+
+#page-nav-burger {
+    display: none;
+}
+
 #page-nav-collapser {
     border-radius: 999rem;
     width: 100%;
     padding: 8px;
     cursor: pointer;
-    border: solid 2px black;
-    background-color: black;
-    color: white;
+    border: solid 2px var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
     transition: all var(--timing) var(--easing);
 }
 
-#page-nav-collapser:hover {
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+#page-nav-collapser:hover,
+#page-nav-collapser:focus-visible {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
 }
 
 #page-nav-collapser i {
@@ -86,8 +114,9 @@ nav ul {
     transition: all var(--timing) var(--easing);
 }
 
-.nav-row a:hover {
-    color: white;
+.nav-row a:hover,
+.nav-row a:focus-visible {
+    color: var(--color-secondary);
 }
 
 .nav-row i {
@@ -105,16 +134,18 @@ nav ul {
 
 .page-nav:not(.expanded) .nav-row a span {
     opacity: 0;
-    display: none;
-    animation-name: hide;
-    animation: hide 400ms;
 }
+
 
 main {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     align-items: center;
+    background-color: var(--color-quaternary);
+    overflow: auto;
+    padding: 1rem;
+    transition: all 400ms var(--easing);
 }
 
 #home-page main {
@@ -139,28 +170,111 @@ main {
 }
 
 .page-links a {
-    padding: 0 1rem;
-    border: solid 2px black;
+    display: flex;
+    border: solid 2px var(--color-primary);
+    background-color: var(--color-primary);
     border-radius: 999rem;
-    text-align: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .page-links a span {
-    height: 100%;
+    display: block;
     padding: 1rem 0;
+    flex-grow: 1;
+    text-align: center;
+    transition: all 400ms var(--easing);
+    background-color: var(--color-secondary);
+    overflow: hidden;
 }
 
 .page-links a:nth-of-type(odd) span:last-of-type {
-    display: none;
-    background-color: black;
+    color: var(--color-secondary);
+    background-color: inherit;
+    max-width: 0;
+    flex-grow: 2;
 }
 
 .page-links a:nth-of-type(even) span:first-of-type {
-    display: none;
-    background-color: black;
+    color: var(--color-secondary);
+    background-color: inherit;
+    max-width: 0;
+    flex-grow: 2;
 }
 
-@keyframes hide {
-    from {display: initial;}
-    to {display: none;}
+.page-links a:nth-of-type(odd) span:first-of-type {
+    clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 0% 100%);
+}
+
+.page-links a:nth-of-type(even) span:last-of-type {
+    clip-path: polygon(0% 100%, 20% 0%, 100% 0%, 100% 100%);
+}
+
+.page-links a:nth-of-type(odd):hover span:last-of-type,
+.page-links a:nth-of-type(odd):focus span:last-of-type {
+    max-width: 50%;
+}
+
+.page-links a:nth-of-type(even):hover span:first-of-type,
+.page-links a:nth-of-type(even):focus span:first-of-type {
+    max-width: 50%;
+}
+
+@media screen and (max-width: 650px) {
+
+    .page-nav {
+        padding: 5rem 0 1rem 0;
+        padding-top: 5rem;
+        max-width: 0;
+        position: absolute;
+        z-index: 100
+    }
+
+    .page-nav.expanded {
+        padding: 5rem 1rem 1rem 1rem;
+    }
+
+    .page-nav.expanded + main {
+        filter: brightness(0.5);
+    }
+
+    #page-nav-collapser {
+        display: none;
+    }
+
+    #page-nav-burger {
+        display: block;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        background: none;
+        border-radius: 999rem;
+        border: none;
+        font-size: 32px;
+        cursor: pointer;
+        color: var(--color-primary);
+        width: 48px;
+        height: 48px;
+        padding: 0;
+    }
+
+    #page-nav-burger i {
+        pointer-events: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: 400ms ease;
+    }
+    
+    .page-nav.expanded #page-nav-burger .burger {
+        transform: translate(50%, -50%) rotate(90deg);
+        opacity: 0;
+    }
+
+    .page-nav:not(.expanded) #page-nav-burger .x {
+        transform: translate(-50%, -50%) rotate(-90deg);
+        opacity: 0;
+    }
+    
 }
