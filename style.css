@@ -38,6 +38,15 @@ body {
     overflow: hidden;
 }
 
+.before::before, .after::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -64,6 +73,10 @@ a {
     color: inherit;
 }
 
+img {
+    max-width: 100%;
+}
+
 button {
     padding: 0;
 }
@@ -73,6 +86,10 @@ footer {
     text-align: center;
     font-size: 14px;
     transition: var(--transition-color);
+}
+
+a.email {
+    color: var(--text-color-hover);
 }
 
 nav ul {
@@ -216,8 +233,16 @@ main {
     justify-content: center;
 }
 
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 #home-page main > .content-wrapper {
     width: fit-content;
+    
 }
 
 .page-intro {
@@ -284,6 +309,77 @@ main {
 .page-links a:nth-of-type(even):hover span:first-of-type,
 .page-links a:nth-of-type(even):focus span:first-of-type {
     max-width: 50%;
+}
+
+.projects-carousel {
+    position: relative;
+    display: flex;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+}
+
+.projects-carousel .carousel-item {
+    position: absolute;
+    width: 30rem;
+    height: 40rem;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    transition: 400ms var(--easing);
+}
+
+.projects-carousel .carousel-item::before {
+    background-color: var(--color-secondary);
+    opacity: 1;
+    z-index: -1;
+    transition: var(--transition-color);
+}
+
+.projects-carousel .carousel-item[data-order='0'] {
+    z-index: -2;
+    opacity: 0;
+    translate: -60% -10rem;
+    scale: .7
+}
+
+.projects-carousel .carousel-item[data-order='1'] {
+    z-index: -2;
+    opacity: .5;
+    translate: -50% -5rem;
+    scale: .8
+}
+
+.projects-carousel .carousel-item[data-order='2'] {
+    z-index: 1;
+    opacity: 1;
+    translate: 0 0;
+}
+
+.projects-carousel .carousel-item[data-order='3'] {
+    z-index: -1;
+    opacity: .5;
+    translate: 50% -5rem;
+    scale: .8
+}
+
+.projects-carousel .carousel-img {
+    height: 60%;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.projects-carousel .carousel-img img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    object-position: center;
+}
+
+.projects-carousel .carousel-text {
+    
 }
 
 @media screen and (max-width: 650px) {
