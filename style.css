@@ -47,6 +47,10 @@ body {
     border-radius: 999rem;  
 }
 
+::-webkit-scrollbar-thumb:hover {
+    filter: brightness(1.2)
+}
+
 ::-webkit-scrollbar-track {
     background: transparent;
 }
@@ -247,6 +251,7 @@ main {
     transition: all 400ms var(--easing);
     background-color: var(--color-secondary);
     overflow: hidden;
+    pointer-events: none;
 }
 
 .page-links a:nth-of-type(odd) span:last-of-type {
