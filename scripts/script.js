@@ -57,6 +57,7 @@ async function transitionPage(url) {
     window.location.replace(url);
 }
 
+// moves every carousel item's index by a value
 function moveCarousel(container, value=1) {
     let items = container.querySelectorAll('.carousel-item');
     let maxIndex = items.length - 1;
@@ -69,6 +70,20 @@ function moveCarousel(container, value=1) {
         }
         item.dataset.order = newOrder.toString();
     }
+}
+
+// displays an enlarged image on the page
+function displayImage(src, alt='') {
+    let overlay = document.createElement('div');
+    overlay.className = 'image-overlay';
+    let image = document.createElement('img');
+    image.alt = alt;
+    image.src = src;
+    overlay.appendChild(image);
+    document.querySelector('.page-wrapper').appendChild(overlay);
+    overlay.addEventListener('click', ()=> {
+        overlay.remove();
+    }, {once: true})
 }
 
 // initializes the page
@@ -113,12 +128,27 @@ function addEventListeners() {
     });
 
     // carousel arrows
-    document.querySelector('.projects-carousel .left-arrow').addEventListener('click', (e)=> {
-        moveCarousel(e.target.parentElement, -1);
-    })
-    document.querySelector('.projects-carousel .right-arrow').addEventListener('click', (e)=> {
+    document.querySelector('.projects-carousel .left-arrow')?.addEventListener('click', (e)=> {
         moveCarousel(e.target.parentElement, 1);
     })
+    document.querySelector('.projects-carousel .right-arrow')?.addEventListener('click', (e)=> {
+        moveCarousel(e.target.parentElement, -1);
+    })
+
+    // carousel items
+    document.querySelectorAll('.projects-carousel .carousel-item')?.forEach((item => {
+        item.addEventListener('click', (e)=> {
+            transitionPage(e.target.dataset.href);
+        })
+    }))
+
+    // gallery items
+    document.querySelectorAll('.gallery-item')?.forEach((item => {
+        item.addEventListener('click', ()=> {
+            let image = item.querySelector('img');
+            displayImage(image.src, image.alt)
+        })
+    }))
 }
 
 
