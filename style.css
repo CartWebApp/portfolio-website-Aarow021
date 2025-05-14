@@ -143,8 +143,11 @@ nav ul {
 }
 
 #page-nav-collapser {
-    border-radius: 999rem;
     width: 100%;
+}
+
+.btn-1 {
+    border-radius: 999rem;
     padding: 8px;
     cursor: pointer;
     border: solid 2px var(--color-primary);
@@ -154,13 +157,13 @@ nav ul {
                 var(--transition-bg);
 }
 
-#page-nav-collapser:hover,
-#page-nav-collapser:focus-visible {
+.btn-1:hover,
+.btn-1:focus-visible {
     background-color: var(--color-secondary);
     color: var(--color-primary);
 }
 
-#page-nav-collapser i {
+.btn-1 i {
     pointer-events: none;
 }
 
@@ -196,6 +199,7 @@ nav ul {
     display: block;
     transition: opacity 400ms var(--easing);
     margin: auto;
+    pointer-events: none;
 }
 
 .page-nav:not(.expanded) .nav-row a span {
@@ -218,7 +222,8 @@ nav ul {
 
 .scroll-wrapper {
     flex-grow: 1;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 main {
@@ -227,7 +232,6 @@ main {
     width: 100%;
     min-height: 100%;
     align-items: center;    
-    padding: 1rem;
     transition: all 400ms var(--easing),
                 var(--transition-bg);
 }
@@ -242,6 +246,7 @@ main {
     align-items: center;
     width: 100%;
     min-height: 100%;
+    padding: 1rem;
 }
 
 #home-page main > .content-wrapper {
@@ -320,7 +325,7 @@ main {
     position: relative;
     display: flex;
     width: 100%;
-    overflow-x: hidden;
+    max-width: 1080px;
     align-items: center;
     justify-content: center;
     height: clamp(30rem, 60vh, 40rem);
@@ -329,14 +334,19 @@ main {
 
 .projects-carousel .carousel-item {
     position: absolute;
-    width: 30rem;
-    height: 100%;
+    width: clamp(20rem, 60%, clamp(30rem, 30rem, calc(100% - 1rem)));
+    height: 90%;
     padding: 1rem;
     border-radius: 8px;
     border: solid 3px var(--color-primary);
     overflow: hidden;
     opacity: 0;
+    cursor: pointer;
     transition: 400ms var(--easing);
+}
+
+.projects-carousel .carousel-item:hover {
+    transform: scale(1.05);
 }
 
 .projects-carousel .carousel-item::before {
@@ -347,30 +357,39 @@ main {
 }
 
 .projects-carousel .carousel-item[data-order='0'] {
-    z-index: -2;
+    z-index: -3;
     opacity: 0;
     translate: -60% -10rem;
-    scale: .7
+    scale: .7;
+    pointer-events: none;
 }
 
 .projects-carousel .carousel-item[data-order='1'] {
-    z-index: -2;
-    opacity: .5;
+    z-index: 1;
+    opacity: .4;
     translate: -50% -5rem;
     scale: .8
 }
 
 .projects-carousel .carousel-item[data-order='2'] {
-    z-index: 1;
+    z-index: 2;
     opacity: 1;
     translate: 0 0;
 }
 
 .projects-carousel .carousel-item[data-order='3'] {
-    z-index: -1;
-    opacity: .5;
+    z-index: 1;
+    opacity: .4;
     translate: 50% -5rem;
     scale: .8
+}
+
+.projects-carousel .carousel-item[data-order='4'] {
+    z-index: 0;
+    opacity: 0;
+    translate: 60% -10rem;
+    scale: .7;
+    pointer-events: none;
 }
 
 .projects-carousel .carousel-img {
@@ -389,6 +408,21 @@ main {
 
 .projects-carousel .carousel-text {
     
+}
+
+.projects-carousel > button {
+    font-size: 48px;
+    position: absolute;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.projects-carousel .left-arrow {
+    left: 1rem;
+}
+
+.projects-carousel .right-arrow {
+    right: 1rem;
 }
 
 @media screen and (max-width: 650px) {
