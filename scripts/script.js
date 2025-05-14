@@ -3,7 +3,7 @@ import * as fns from './functions.js'
 
 // data stored across pages
 export let globalData = {
-    darkMode: false,
+    darkMode: true,
     colors: {
         dark: {
             color_primary: 'rgb(124, 30, 255)',
@@ -81,7 +81,9 @@ function displayImage(src, alt='') {
     image.src = src;
     overlay.appendChild(image);
     document.querySelector('.page-wrapper').appendChild(overlay);
-    overlay.addEventListener('click', ()=> {
+    overlay.addEventListener('click', async ()=> {
+        overlay.style.animation = 'fade-out 200ms ease';
+        await fns.awaitAnimation(overlay);
         overlay.remove();
     }, {once: true})
 }

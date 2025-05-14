@@ -14,6 +14,7 @@
     --text-color-hover: rgb(0, 0, 0);
     --transition-color: color 150ms ease-in-out;
     --transition-bg: background-color 150ms ease-in-out;
+    --transition-border: border 150ms ease-in-out;
 }
 
 * {
@@ -25,8 +26,10 @@ body {
     color: var(--text-color);
     font-family: 'open sans', sans-serif;
     font-size: 20px;
-    transition: var(--transition-color);
-    background-color: var(--color-quaternary)
+    background-color: var(--color-quaternary);
+    overflow: hidden;
+    transition: var(--transition-color),
+                var(--transition-bg);
 }
 
 .page-wrapper {
@@ -93,6 +96,7 @@ footer {
 .link {
     text-decoration: underline;
     color: var(--color-primary);
+    transition: var(--transition-color);
 }
 
 a.email {
@@ -133,8 +137,9 @@ nav ul {
     width: calc(40px + 2rem);
     max-width: calc(40px + 2rem);
     padding: 1rem;
-    overflow: hidden;
+    overflow: auto;
     gap: 1rem;
+    scrollbar-width: none;
     transition: all 400ms var(--easing),
                 var(--transition-bg);
 }
@@ -160,7 +165,8 @@ nav ul {
     background-color: var(--color-primary);
     color: var(--color-secondary);
     transition: var(--transition-color),
-                var(--transition-bg);
+                var(--transition-bg),
+                var(--transition-border);
 }
 
 .btn-1:hover,
@@ -281,7 +287,8 @@ main {
     border-radius: 999rem;
     justify-content: center;
     overflow: hidden;
-    transition: var(--transition-bg);
+    transition: var(--transition-bg),
+                var(--transition-border);
 }
 
 .page-links a span {
@@ -349,7 +356,8 @@ main {
     overflow: hidden;
     opacity: 0;
     cursor: pointer;
-    transition: 400ms var(--easing);
+    transition: 400ms var(--easing),
+                var(--transition-border);
 }
 
 .projects-carousel .carousel-item * {
@@ -452,6 +460,7 @@ main {
     border-radius: 1rem;
     overflow: hidden;
     border: solid 3px var(--color-primary);
+    transition: var(--transition-border);
 }
 
 .project-wrapper .header-wrapper img {
@@ -506,7 +515,7 @@ main {
     padding: 2rem;
     background-color: rgba(0, 0, 0, 0.568);
     cursor: unset;
-    animation: fade-in 200ms ease
+    animation: fade-in 200ms ease;
 }
 
 .image-overlay img {
@@ -531,9 +540,21 @@ main {
     .page-nav.expanded {
         padding: 5rem 1rem 1rem 1rem;
     }
+    
+    .page-nav + .scroll-wrapper::before {
+        position: fixed;
+        content: '';
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 19;
+        pointer-events: none;
+        transition: background-color 400ms var(--easing);
+    }
 
-    .page-nav.expanded + .scroll-wrapper {
-        filter: brightness(0.5);
+    .page-nav.expanded + .scroll-wrapper::before {
+        background-color: rgba(0, 0, 0, 0.522);
     }
 
     #page-nav-collapser {
@@ -580,4 +601,9 @@ main {
 @keyframes fade-in {
     from {opacity: 0;}
     to {opacity: 1;}
+}
+
+@keyframes fade-out {
+    from {opacity: 1;}
+    to {opacity: 0;}
 }
