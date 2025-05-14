@@ -9,7 +9,7 @@ export let globalData = {
             color_primary: 'rgb(124, 30, 255)',
             color_secondary: 'rgb(24, 0, 118)',
             color_tertiary: 'rgb(7, 0, 86)',
-            color_quaternary: 'rgb(2, 0, 34)',
+            color_quaternary: 'rgb(3, 0, 50)',
             text_color: 'rgb(255, 255, 255)',
             text_color_hover: 'rgb(200, 255, 0)'
         },
